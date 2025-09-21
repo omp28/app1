@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  react-app:
+    build: ./app1
+    ports:
+      - "3000:3000"
+    container_name: react_app_container   
+
+  next-app:
+    build: ./app2-next
+    ports:
+      - "3001:3000"
+    container_name: next_app_container    
