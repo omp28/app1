@@ -1,0 +1,9 @@
+:80 {
+    handle /next* {
+        reverse_proxy next-app:3000
+    }
+
+    handle {
+        reverse_proxy react-app:3000
+    }
+}

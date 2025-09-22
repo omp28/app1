@@ -1,14 +1,39 @@
+# version: "3.8"
+
+# services:
+#   react-app:
+#     build: ./app1
+#     ports:
+#       - "3000:3000"
+#     container_name: react_app_container   
+
+#   next-app:
+#     build: ./app2-next
+#     ports:
+#       - "3001:3000"
+#     container_name: next_app_container    
 version: "3.8"
 
 services:
   react-app:
     build: ./app1
-    ports:
-      - "3000:3000"
-    container_name: react_app_container   
+    container_name: react_app_container
+    expose:
+      - "3000"  
 
   next-app:
     build: ./app2-next
+    container_name: next_app_container
+    expose:
+      - "3000"   
+
+  caddy:
+    image: caddy:2
+    container_name: caddy_container
     ports:
-      - "3001:3000"
-    container_name: next_app_container    
+      - "80:80"   
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - react-app
+      - next-app
